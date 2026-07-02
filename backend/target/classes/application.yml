@@ -1,0 +1,34 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  application:
+    name: travelsphere-backend
+
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/travelsphere}
+      database: travelsphere
+
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+
+# ─── JWT Configuration ─────────────────────────────────────────────────────────
+# IMPORTANT: Replace 'app.jwt.secret' with a secure Base64-encoded key (≥ 256 bits)
+# in production. Use environment variables or a secrets manager.
+app:
+  jwt:
+    secret: ${JWT_SECRET:dGhpcy1pcy1hLXZlcnktc2VjdXJlLWtleS10aGF0LWlzLWxvbmctZW5vdWdoLWZvci1ITUFDLVNIQTI1Ng==}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}   # 24 hours
+
+# ─── Logging ───────────────────────────────────────────────────────────────────
+logging:
+  level:
+    com.travelsphere: DEBUG
+    org.springframework.security: INFO
+    org.springframework.data.mongodb: INFO
