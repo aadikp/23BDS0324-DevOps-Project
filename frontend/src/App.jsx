@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import DiscoveryPage       from './pages/DiscoveryPage'
 import ItineraryPlannerPage from './pages/ItineraryPlannerPage'
 import AdminDashboard      from './pages/AdminDashboard'
+import LoginPage         from './pages/LoginPage'
 
 // ─── Guard: requires ROLE_ADMIN ───────────────────────────────────────────────
 function AdminRoute({ children }) {
@@ -20,6 +21,7 @@ function AppShell() {
         <Routes>
           <Route path="/"        element={<DiscoveryPage />} />
           <Route path="/planner" element={<ItineraryPlannerPage />} />
+          <Route path="/login"   element={<LoginPage />} />
           <Route path="/admin"   element={
             <AdminRoute>
               <AdminDashboard />

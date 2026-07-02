@@ -157,6 +157,9 @@ export default function ItineraryPlannerPage() {
         // Show login prompt
         setError('Please sign in to get personalised recommendations.')
       } else {
+        // Log exact error for debugging
+        const apiError = err.response?.data?.message || err.message;
+        setError(`API Error: ${apiError}`);
         // Use mock results for demo
         setResults(MOCK_RESULTS)
         setUsedMock(true)
