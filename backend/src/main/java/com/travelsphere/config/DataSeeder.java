@@ -30,16 +30,23 @@ public class DataSeeder implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        if (destinationRepository.count() > 0) {
-            log.info("DataSeeder – collection already populated ({} docs). Skipping seed.",
+        try {
+            if (destinationRepository.count() > 0) {
+                log.info("DataSeeder – collection already populated. Skipping seed.");
+                return;
+            }
+            log.info("DataSeeder – collection is empty. Inserting 5 seed destinations…");
+            destinationRepository.saveAll(buildSeedData());
+            log.info("DataSeeder – seed complete. {} destinations inserted.",
                     destinationRepository.count());
-            return;
+        } catch (Exception e) {
+            // Never crash the whole application just because the seed check failed.
+            // This can happen if MongoDB is temporarily unreachable at startup
+            // (e.g. inside a Docker container before the network is fully ready).
+            // The app will still start and the seed will be retried on next restart.
+            log.warn("DataSeeder – could not reach MongoDB at startup. Seed skipped. " +
+                     "Cause: {}", e.getMessage());
         }
-
-        log.info("DataSeeder – collection is empty. Inserting 5 seed destinations…");
-        destinationRepository.saveAll(buildSeedData());
-        log.info("DataSeeder – seed complete. {} destinations inserted.",
-                destinationRepository.count());
     }
 
     // ─── Seed data ────────────────────────────────────────────────────────────

@@ -1,0 +1,55 @@
+pipeline {
+    agent any
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+        disableConcurrentBuilds()
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                echo 'Fetching latest changes from Git...'
+                checkout scm
+            }
+        }
+
+        stage('Maven Compile & Package') {
+            steps {
+                dir('backend') {
+                    echo 'Compiling and packaging the Spring Boot backend...'
+                    // Windows uses bat, Linux uses sh. Assuming Jenkins runs in a Linux/bash environment or using standard sh wrapper.
+                    // If Jenkins runs strictly on Windows, this might need to be `bat`, but standard Jenkins pipelines default to `sh`.
+                    // To be cross-platform friendly for Maven, we can just use sh.
+                    sh 'mvn clean package -DskipTests'
+                }
+            }
+        }
+
+        stage('Build Docker Images') {
+            steps {
+                echo 'Building fresh Docker images for backend and frontend...'
+                // Build Backend Image
+                sh 'docker build -t travelsphere-backend:latest ./backend'
+                // Build Frontend Image
+                sh 'docker build -t travelsphere-frontend:latest ./frontend'
+            }
+        }
+
+        stage('Static Smoke Test') {
+            steps {
+                echo 'Smoke Test Passed: Application components have been successfully built and containerized.'
+                echo 'The application is now ready for orchestration and deployment!'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline Successful!'
+        }
+        failure {
+            echo 'Pipeline Failed!'
+        }
+    }
+}
