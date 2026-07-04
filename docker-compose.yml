@@ -57,6 +57,22 @@ services:
       - travelsphere-net
     restart: unless-stopped
 
+  # ─── Jenkins CI/CD ───────────────────────────────────────────────────────────
+  jenkins:
+    build:
+      context: ./jenkins
+      dockerfile: Dockerfile
+    container_name: jenkins-server
+    ports:
+      - "9090:8080" # Maps container 8080 to host 9090
+      - "50000:50000"
+    volumes:
+      - jenkins_data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock # Allows Jenkins to run Docker commands
+    networks:
+      - travelsphere-net
+    restart: unless-stopped
+
 # ─── Shared network ───────────────────────────────────────────────────────────
 # Both services join this bridge network. Docker's internal DNS resolver
 # allows NGINX to reach the backend via the hostname 'travelsphere-backend'
@@ -64,3 +80,7 @@ services:
 networks:
   travelsphere-net:
     driver: bridge
+
+# ─── Volumes ──────────────────────────────────────────────────────────────────
+volumes:
+  jenkins_data:

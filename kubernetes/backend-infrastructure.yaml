@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: travelsphere-backend
+  labels:
+    app: travelsphere-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: travelsphere-backend
+  template:
+    metadata:
+      labels:
+        app: travelsphere-backend
+    spec:
+      containers:
+        - name: travelsphere-backend
+          image: travelsphere-backend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATA_MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: travelsphere-secrets
+                  key: MONGODB_URI
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  labels:
+    app: travelsphere-backend
+spec:
+  type: ClusterIP
+  selector:
+    app: travelsphere-backend
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
