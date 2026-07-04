@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: travelsphere-frontend
-          image: travelsphere-frontend:latest
+          image: travelsphere-frontend:v3
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80

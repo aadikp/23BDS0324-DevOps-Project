@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: travelsphere-backend
-          image: travelsphere-backend:latest
+          image: travelsphere-backend:v9
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
