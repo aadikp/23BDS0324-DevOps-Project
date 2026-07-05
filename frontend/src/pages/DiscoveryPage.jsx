@@ -75,7 +75,7 @@ function DestinationCard({ dest }) {
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
         <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/50 backdrop-blur-sm rounded-full px-2 py-1">
           <ShieldCheck className="w-3 h-3 text-emerald-400" />
           <span className="text-xs text-emerald-300 font-semibold">{dest.safetyRating}/10</span>
@@ -127,10 +127,6 @@ function Hero() {
       </div>
 
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-        <div className="inline-flex items-center gap-2 badge-blue mb-6 animate-fade-in">
-          <Sparkles className="w-3.5 h-3.5" />
-          AI-Powered Travel Recommendations
-        </div>
 
         <h1 className="font-display text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 animate-slide-up">
           Discover Your Next

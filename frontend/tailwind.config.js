@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -8,43 +9,47 @@ export default {
     extend: {
       colors: {
         brand: {
-          50:  '#eef9ff',
-          100: '#d8f0ff',
-          200: '#b9e5ff',
-          300: '#89d6ff',
-          400: '#52beff',
-          500: '#2a9fff',
-          600: '#0f7ef5',
-          700: '#0a68e1',
-          800: '#0f54b6',
-          900: '#13488f',
-          950: '#112d5e',
+          50:  '#f0fdfa', // Teal 50
+          100: '#ccfbf1',
+          200: '#99f6e4',
+          300: '#5eead4',
+          400: '#2dd4bf',
+          500: '#14b8a6', // Teal 500
+          600: '#0d9488', // Teal 600
+          700: '#0f766e',
+          800: '#115e59',
+          900: '#134e4a',
+          950: '#042f2e',
         },
         surface: {
-          DEFAULT: '#0f172a',
-          card:    '#1e293b',
-          border:  '#334155',
-          muted:   '#475569',
+          DEFAULT: '#ffffff',
+          card:    '#f8fafc', // slate-50
+          border:  '#e2e8f0', // slate-200
+          muted:   '#64748b', // slate-500
+          
+          // Dark mode surface colors
+          dark:           '#09090b', // zinc-950
+          'dark-card':    '#18181b', // zinc-900
+          'dark-border':  '#27272a', // zinc-800
+          'dark-muted':   '#a1a1aa', // zinc-400
         },
       },
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+        sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui'],
         display: ['Outfit', 'ui-sans-serif'],
       },
       backgroundImage: {
-        'hero-gradient': 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%)',
-        'card-gradient': 'linear-gradient(145deg, #1e293b, #0f172a)',
-        'brand-gradient': 'linear-gradient(135deg, #0a68e1, #2a9fff)',
+        'brand-gradient': 'linear-gradient(135deg, #0d9488, #4f46e5)', // Teal 600 to Indigo 600
       },
       boxShadow: {
-        'glow': '0 0 20px rgba(42, 159, 255, 0.3)',
-        'glow-lg': '0 0 40px rgba(42, 159, 255, 0.2)',
-        'card': '0 4px 24px rgba(0,0,0,0.4)',
+        'glow': '0 0 20px rgba(79, 70, 229, 0.3)',
+        'glow-lg': '0 0 40px rgba(79, 70, 229, 0.2)',
+        'card': '0 4px 24px rgba(0,0,0,0.06)',
+        'dark-card': '0 4px 24px rgba(0,0,0,0.4)',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.6s ease-out',
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4,0,0.6,1) infinite',
       },
       keyframes: {
         fadeIn: {
