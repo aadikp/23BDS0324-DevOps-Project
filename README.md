@@ -21,10 +21,10 @@ TravelSphere is an intelligent, scalable travel recommendation engine architecte
 graph TD
     Client[Client Browser / Mobile] -->|HTTPS| Nginx[NGINX Reverse Proxy & Frontend]
     
-    subgraph Kubernetes Cluster
+    subgraph k8s [Kubernetes Cluster]
         Nginx -->|REST API Calls| Backend[Spring Boot API Service]
         
-        subgraph Observability
+        subgraph obs [Observability]
             Backend -->|Metrics| Prometheus
             Prometheus --> Grafana[Grafana Dashboards]
             Nagios[Nagios Checks] -.-> Backend
@@ -33,10 +33,10 @@ graph TD
     
     Backend -->|NoSQL Queries| MongoDB[(MongoDB Atlas)]
     
-    subgraph CI/CD Pipeline
+    subgraph cicd [CI/CD Pipeline]
         GitHub[GitHub Repo] -->|Webhook| Jenkins[Jenkins Automation Server]
         Jenkins -->|Build Images| DockerHub[Docker Hub Registry]
-        Jenkins -->|Apply Manifests| Kubernetes Cluster
+        Jenkins -->|Apply Manifests| k8s
     end
 ```
 
@@ -62,5 +62,4 @@ docker compose up -d --build
 
 The frontend application will be instantly available at `http://localhost:5173`, successfully proxying requests to the backend Spring Boot container.
 
-## 👥 Authors
-Developed as a Full-Stack DevOps Capstone Project.
+
