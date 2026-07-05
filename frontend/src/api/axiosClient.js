@@ -2,7 +2,8 @@ import axios from 'axios'
 
 // ─── Base instance ────────────────────────────────────────────────────────────
 const api = axios.create({
-  baseURL: '/api',
+  // Use the live Render URL if running on Vercel/Netlify, otherwise fallback to local proxy
+  baseURL: import.meta.env.VITE_API_URL || 'https://two3bds0324-devops-project.onrender.com/api',
   timeout: 15_000,
   headers: {
     'Content-Type': 'application/json',
