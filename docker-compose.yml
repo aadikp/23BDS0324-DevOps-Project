@@ -32,7 +32,9 @@ services:
       - SPRING_DATA_MONGODB_URI=${SPRING_DATA_MONGODB_URI:-mongodb+srv://<USERNAME>:<PASSWORD>@<CLUSTER>.mongodb.net/travelsphere?appName=TravelSphere-Cluster}
       - SPRING_PROFILES_ACTIVE=docker
     networks:
-      - travelsphere-net
+      travelsphere-net:
+        aliases:
+          - backend-service
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/api/auth/health"]
