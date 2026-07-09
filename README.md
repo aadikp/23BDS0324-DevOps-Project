@@ -53,8 +53,8 @@ To spin up the entire application stack locally using Docker Compose:
 
 ```bash
 # Clone the repository
-git clone https://github.com/aadikp/23BDS0324-DevOps-Project.git
-cd 23BDS0324-DevOps-Project
+git clone https://github.com/aadikp/TravelSphere.git
+cd TravelSphere
 
 # Spin up the infrastructure
 docker compose up -d --build
